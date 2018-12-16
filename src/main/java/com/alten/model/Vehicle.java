@@ -13,6 +13,9 @@ public class Vehicle {
     @Column(name = "reg")
     private String RegistrationNumber;
 
+    @ManyToOne
+    private Customer customer;
+
     public String getId() {
         return id;
     }
@@ -27,6 +30,14 @@ public class Vehicle {
 
     public void setRegistrationNumber(String registrationNumber) {
         RegistrationNumber = registrationNumber;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
