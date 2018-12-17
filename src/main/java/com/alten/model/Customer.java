@@ -17,9 +17,6 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "customer")
-    private Set<Vehicle> vehicles;
-
     public Long getId() {
         return id;
     }
@@ -44,21 +41,12 @@ public class Customer {
         this.address = address;
     }
 
-    public Set<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", vehicles=" + vehicles +
                 '}';
     }
 }

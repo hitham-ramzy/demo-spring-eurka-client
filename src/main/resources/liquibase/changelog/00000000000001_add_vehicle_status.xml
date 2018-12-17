@@ -7,6 +7,7 @@
 
     <property name="now" value="now()" dbms="h2"/>
     <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
 
     <changeSet id="00000000000001-1" author="hitham">
         <createTable tableName="vehicle_status_log">

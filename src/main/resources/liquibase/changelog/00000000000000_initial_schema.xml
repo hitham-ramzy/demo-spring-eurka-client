@@ -4,6 +4,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
+    <property name="autoIncrement" value="true"/>
+
     <changeSet id="00000000000000-1" author="hitham">
         <createTable tableName="customer">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
