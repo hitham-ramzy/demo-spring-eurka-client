@@ -1,11 +1,13 @@
 package com.alten.service;
 
 import com.alten.model.Vehicle;
+import com.alten.model.VehicleCriteria;
 import com.alten.repository.VehicleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,13 +39,14 @@ public class VehicleService {
     /**
      * Get all the vehicles.
      *
+     * @param criteria
      * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<Vehicle> findAll(Pageable pageable) {
+    public Page<Vehicle> findAll(VehicleCriteria criteria, Pageable pageable) {
         log.debug("Request to get all Drivers");
-        return vehicleRepository.findAll(pageable);
+        return vehicleRepository.findAll(createSpecification(criteria), pageable);
     }
 
     /**
@@ -72,6 +75,26 @@ public class VehicleService {
 
     @Transactional
     public void deleteByCustomerId(Long customerId) {
-         vehicleRepository.deleteByCustomerId(customerId);
+        vehicleRepository.deleteByCustomerId(customerId);
+    }
+
+    /**
+     * Create specification from search criteria.
+     *
+     * @param vehicleCriteria
+     * @return Specification for {@link Vehicle}
+     */
+    private static Specification<Vehicle> createSpecification(VehicleCriteria vehicleCriteria) {
+        Specification<Vehicle> specification = Specification.where(null);
+        if (vehicleCriteria.getCustomerId() != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("customer").get("id"), vehicleCriteria.getCustomerId()));
+        }
+        if (vehicleCriteria.getCustomerName() != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("customer").get("name"), "%" + vehicleCriteria.getCustomerName() + "%"));
+        }
+        if (vehicleCriteria.getConnected() != null) {
+            specification = specification.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("connected"), vehicleCriteria.getConnected()));
+        }
+        return specification;
     }
 }

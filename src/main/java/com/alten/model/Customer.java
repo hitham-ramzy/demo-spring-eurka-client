@@ -1,7 +1,9 @@
 package com.alten.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Customer {
@@ -9,6 +11,8 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
+    @JsonSerialize
     private Long id;
 
     @Column(name = "name")

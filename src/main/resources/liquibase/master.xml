@@ -5,4 +5,5 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <include file="liquibase/changelog/00000000000000_initial_schema.xml"/>
     <include file="liquibase/changelog/00000000000001_add_vehicle_status.xml"/>
+    <include file="liquibase/changelog/00000000000002_move_status_to_vehicle.xml"/>
 </databaseChangeLog>

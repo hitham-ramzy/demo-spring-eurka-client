@@ -1,6 +1,7 @@
 package com.alten.resource;
 
 import com.alten.model.Vehicle;
+import com.alten.model.VehicleCriteria;
 import com.alten.service.VehicleService;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -50,9 +51,9 @@ public class VehicleResource {
     }
 
     @GetMapping("/vehicles")
-    public ResponseEntity<List<Vehicle>> getAllVehicles(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Vehicle>> getAllVehicles(VehicleCriteria criteria, @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Vehicles");
-        Page<Vehicle> page = vehicleService.findAll(pageable);
+        Page<Vehicle> page = vehicleService.findAll(criteria, pageable);
         return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
     }
 

@@ -1,6 +1,7 @@
 package com.alten.model;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Vehicle {
@@ -15,6 +16,15 @@ public class Vehicle {
 
     @ManyToOne
     private Customer customer;
+
+    @Column(name = "ip")
+    private String ip;
+
+    @Column(name = "connected")
+    private Boolean connected;
+
+    @Column(name = "last_status_time")
+    private ZonedDateTime lastStatusTime;
 
     public String getId() {
         return id;
@@ -40,11 +50,39 @@ public class Vehicle {
         this.customer = customer;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(Boolean connected) {
+        this.connected = connected;
+    }
+
+    public ZonedDateTime getLastStatusTime() {
+        return lastStatusTime;
+    }
+
+    public void setLastStatusTime(ZonedDateTime lastStatusTime) {
+        this.lastStatusTime = lastStatusTime;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
                 "id='" + id + '\'' +
                 ", RegistrationNumber='" + RegistrationNumber + '\'' +
+                ", customer=" + customer +
+                ", ip='" + ip + '\'' +
+                ", connected=" + connected +
+                ", lastStatusTime=" + lastStatusTime +
                 '}';
     }
 }
