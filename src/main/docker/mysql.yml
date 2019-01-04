@@ -1,0 +1,14 @@
+version: '2'
+services:
+    alten-mysql:
+        image: mysql:5.7
+        container_name: alten_database
+        environment:
+        - MYSQL_ROOT_USER=root
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=alten
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=user
+        ports:
+            - 3306:3306
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8 --explicit_defaults_for_timestamp

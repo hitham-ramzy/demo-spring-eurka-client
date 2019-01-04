@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alten</groupId>
-    <artifactId>alten</artifactId>
+    <artifactId>alten-resources</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>alten</name>
     <description>Demo project for Spring Boot</description>
@@ -74,12 +74,33 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>alten-resources</finalName>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <configuration>
                     <changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
+                </configuration>
+            </plugin>
+            <!--Docker maven plugin-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker/</dockerDirectory>
+                    <baseImage>java</baseImage>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.artifactId}.jar</include>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

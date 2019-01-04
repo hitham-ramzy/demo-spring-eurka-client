@@ -1,0 +1,12 @@
+version: '2'
+services:
+    alten-resources:
+        image: alten-resources
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://alten-mysql:3306/alten?useUnicode=true&characterEncoding=utf8&useSSL=false
+        ports:
+            - 8080:8080
+    alten-mysql:
+        extends:
+            file: mysql.yml
+            service: alten-mysql

@@ -2,3 +2,24 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
+spring:
+  application:
+    name: alten-resources
+  datasource:
+    url: jdbc:mysql://localhost:3306/alten?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: false
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/master.xml
+server:
+  port: 8060
+info:
+  app:
+    name: Alten Resources application to get vehicles data
+    description: You can create CRUD operations on this app.
+    version: 1.0.0
