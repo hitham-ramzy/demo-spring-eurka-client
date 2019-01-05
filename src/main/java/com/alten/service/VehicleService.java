@@ -56,7 +56,7 @@ public class VehicleService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<Vehicle> findOne(Long id) {
+    public Optional<Vehicle> findOne(String id) {
         log.debug("Request to get Vehicle : {}", id);
         return vehicleRepository.findById(id);
     }
@@ -67,7 +67,7 @@ public class VehicleService {
      * @param id the id of the entity
      */
     @Transactional
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete Vehicle : {}", id);
         Optional<Vehicle> vehicleOptional = findOne(id);
         vehicleOptional.ifPresent(vehicleRepository::delete);

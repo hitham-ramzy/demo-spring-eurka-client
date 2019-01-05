@@ -59,13 +59,13 @@ public class VehicleResource {
     }
 
     @GetMapping("/vehicles/{id}")
-    public ResponseEntity<Vehicle> getVehicle(@PathVariable Long id) {
+    public ResponseEntity<Vehicle> getVehicle(@PathVariable String id) {
         log.debug("REST request to get Vehicle : {}", id);
         return ResponseEntity.ok(vehicleService.findOne(id).orElse(null));
     }
 
     @DeleteMapping("/vehicles/{id}")
-    public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteVehicle(@PathVariable String id) {
         log.debug("REST request to delete Vehicle : {}", id);
         vehicleService.delete(id);
         return ResponseEntity.ok().build();
